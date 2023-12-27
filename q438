@@ -1,0 +1,32 @@
+class Solution {
+public List<Integer> findAnagrams(String s, String p) {
+        ArrayList<Integer>res=new ArrayList<>();
+         if(s.length()<p.length())
+         return res;
+        int []temp=new int [26];
+        for(int i=0;i<p.length();i++)
+           temp[p.charAt(i)-'a']++;
+
+        int []arr=new int[26];
+        for(int i=0;i<p.length();i++)
+         arr[s.charAt(i)-'a']++;
+
+         if(check(temp,arr))
+         res.add(0);
+
+         for(int i=p.length();i<s.length();i++){
+             arr[s.charAt(i-p.length())-'a']--;
+             arr[s.charAt(i)-'a']++;
+             if(check(temp,arr))
+             res.add(i-p.length()+1);
+         }
+ return res;
+    }
+    static boolean check(int []arr1,int []arr2){
+        for(int i=0;i<arr1.length;i++)
+        if(arr1[i]!=arr2[i])
+        return false;
+
+        return true;
+    }
+}
