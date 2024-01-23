@@ -1,0 +1,26 @@
+class Solution {
+    public int maxProduct(int[] arr) {
+         long res=1;int j=0;long max=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]!=0){
+            res*=arr[i];
+          //  System.out.println(res);
+            max=Math.max(max,res);
+            }
+            if(arr[i]==0 || i==arr.length-1){
+                if(arr[i]==0)
+                max=Math.max(0,max);
+                
+                while(j<i && res<0){
+                res/=arr[j++];
+                if(j!=i || res==arr[i])
+                max=Math.max(max,res);
+                }
+                res=1;
+                j=i+1;
+            }
+              
+        }
+        return (int)max;
+    }
+}
